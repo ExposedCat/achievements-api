@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+    description: HTTP API template on Express + MongoDB
+    version: '1.0.0'
+    title: HTTP API template on Express + MongoDB
+    contact:
+        email: artem.prokop.dev@gmail.com
+tags:
+    - name: root
+    - name: users
+      description: Users management
+paths:
+    /api:
+        get:
+            summary: Root
+            description: Root API endpoint
+            tags:
+                - root
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: false
+                                    message:
+                                        example: Welcome here. Check docs for instructions how to use this API. Use current URL as main API endpoint
+                                    data:
+                                        example: {}
+
+    /api/users/register:
+        post:
+            summary: Register user
+            description: Creates a new user and saves it in database
+            tags:
+                - users
+            responses:
+                '200':
+                    description: User succesfully registered
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: false
+                                    message:
+                                        example: User successfully signed up
+                                    data:
+                                        $ref: '#/components/schemas/JWT'
+                '400':
+                    description: Invalid or already-used user data specified
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: true
+                                    type:
+                                        example: invalidInput
+                                    message:
+                                        example: 'Password is invalid: should be at least 5 characters long'
+                                    data:
+                                        example: {}
+                '503':
+                    description: Unknown internal error
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: true
+                                    type:
+                                        example: internal
+                                    message:
+                                        example: 'Internal error occurred. Please try again later'
+                                    data:
+                                        example: {}
+            requestBody:
+                description: Data of new user to be registered
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserData'
+
+    /api/users/login:
+        post:
+            summary: Login user
+            description: Get the JWT token to access into the system
+            tags:
+                - user
+            responses:
+                '200':
+                    description: User succesfully logged in
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: false
+                                    message:
+                                        example: User successfully signed in
+                                    data:
+                                        $ref: '#/components/schemas/JWT'
+                '401':
+                    description: Invalid user credentials specified
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: true
+                                    type:
+                                        example: unauthorized
+                                    message:
+                                        example: 'User is not authorized or authorization token is expired'
+                                    data:
+                                        example: {}
+                '503':
+                    description: Unknown internal error
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    isError:
+                                        example: true
+                                    type:
+                                        example: internal
+                                    message:
+                                        example: 'Internal error occurred. Please try again later'
+                                    data:
+                                        example: {}
+            requestBody:
+                description: User to be logged
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserData'
+
+components:
+    schemas:
+        JWT:
+            type: object
+            required:
+                - loginToken
+            properties:
+                loginToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjYyODEyMmYxMzc2MmM0MzkyZThlYzg5NSJ9LCJpYXQiOjE2NTI2NDUyNzcsImV4cCI6MTY1MjY0NjE3N30.9AyrNF3HzNMw7wpGPrVIpzCOmdiamf2VELmlfj7EUKs
+        UserData:
+            type: object
+            required:
+                - email
+                - password
+            properties:
+                email:
+                    type: string
+                    example: john.doe@email.com
+                password:
+                    type: string
+                    example: sjf8432bd_34mfd
+    securitySchemes:
+        JWT:
+            type: apiKey
+            in: header
+            name: Authorization
+            description: |
+                To add contact (/api/addContact) using API, you have to set «Authorization» header.
+
+                The value should be login token generated:
+                • After registration: /api/users/register
+                • After logging in: /api/users/login

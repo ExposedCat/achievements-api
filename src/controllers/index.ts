@@ -1,0 +1,6 @@
+export { setHandlers } from './set.js'
+export { data as rootControllerData } from './root.js'
+export { data as unknownErrorControllerData } from './unknown-error.js'
+export { data as pageNotFoundControllerData } from './page-not-found.js'
+export { data as registerControllerData } from './register.js'
+export { data as loginControllerData } from './login.js'
