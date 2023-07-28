@@ -13,7 +13,6 @@ interface InvalidJWT {
 
 type JWT = ValidJWT | InvalidJWT
 
-// TODO: Move default value to ENV
 async function generateJwt(data: JwtUserData, expiresIn = '15m'): Promise<JWT> {
 	const options = { expiresIn }
 	const [token, error] = await sign(

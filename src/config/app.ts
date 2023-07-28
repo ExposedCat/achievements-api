@@ -17,16 +17,9 @@ async function initApp() {
 	const connectToDatabase = initDatabase(
 		process.env.DB_CONNECTION_STRING as string
 	)
-	const { runServer, server } = initServer(
-		process.env.SESSION_SECRET as string
-	)
+	const { runServer } = initServer(process.env.SESSION_SECRET as string)
 
-	// TODO: Do not start in init file
-	// Start entities
-	await connectToDatabase()
-	runServer(Number(process.env.PORT))
-
-	return server
+	return { runServer, connectToDatabase }
 }
 
 export { initApp }
