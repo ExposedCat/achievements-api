@@ -1,13 +1,7 @@
-import {
-	ResultType,
-	Error,
-	ErrorType,
-	Success,
-	ResponseName,
-	Responses
-} from '../types/index.js'
+import type { Error, Success, Responses } from '../types/index.js'
+import { ResultType, ErrorType, ResponseName } from '../types/index.js'
 
-import { Response } from 'express'
+import type { Response } from 'express'
 
 function error(code: number, type: ErrorType, message: string) {
 	const response: Error = {
@@ -111,7 +105,7 @@ function formResponse(type: ResultType, name: ResponseName, data = {}) {
 			[ResponseName.ContactAdded]: success('Contact successfully added')
 		}
 	}
-	let responseObject = responses[type][name]
+	const responseObject = responses[type][name]
 	if (!responseObject) {
 		console.error(`Unknown "${type}" response "${name}"`)
 		return responses.error.unknown as Error

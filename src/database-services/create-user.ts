@@ -1,4 +1,4 @@
-import { User, UserModel } from '../types/index.js'
+import type { User, UserModel } from '../types/index.js'
 import { encrypt } from '../helpers/index.js'
 
 async function createUser(this: UserModel, email: string, password: string) {

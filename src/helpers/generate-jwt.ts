@@ -1,5 +1,5 @@
 import { sign } from 'async-jsonwebtoken'
-import { JwtUserData } from '../types/index.js'
+import type { JwtUserData } from '../types/index.js'
 
 interface ValidJWT {
 	error: false

@@ -1,5 +1,6 @@
-import { HandlerData, HandlerType } from '../types/index.js'
-import { Express, RequestHandler } from 'express'
+import type { HandlerData } from '../types/index.js'
+import { HandlerType } from '../types/index.js'
+import type { Express, RequestHandler } from 'express'
 import {
 	rootControllerData,
 	unknownErrorControllerData,

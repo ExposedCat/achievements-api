@@ -1,4 +1,4 @@
-import { ResponseName } from './index.js'
+import type { ResponseName } from './index.js'
 
 interface ServiceResponseError {
 	isError: true

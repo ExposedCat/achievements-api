@@ -1,5 +1,5 @@
-import { ObjectId } from 'mongoose'
-import { User, UserModel } from '../types/index.js'
+import type { ObjectId } from 'mongoose'
+import type { User, UserModel } from '../types/index.js'
 
 async function getUserById(this: UserModel, userId: ObjectId) {
 	return getUser.bind(this)({ userId })

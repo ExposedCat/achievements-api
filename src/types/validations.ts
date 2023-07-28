@@ -1,5 +1,5 @@
-import { ResponseName } from './index.js'
-import { ObjectId } from 'mongoose'
+import type { ResponseName } from './index.js'
+import type { ObjectId } from 'mongoose'
 
 interface UserValidationField {
 	value: string

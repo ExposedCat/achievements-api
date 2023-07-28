@@ -1,13 +1,8 @@
-import {
-	BasicHandler,
-	HandlerData,
-	HandlerType,
-	ResponseName,
-	ResultType
-} from '../types/index.js'
+import type { BasicHandler, HandlerData } from '../types/index.js'
+import { HandlerType, ResponseName, ResultType } from '../types/index.js'
 import { respond } from '../services/index.js'
 
-const handler: BasicHandler = async (req, res, next) => {
+const handler: BasicHandler = async (req, res) => {
 	respond(res, ResultType.Success, ResponseName.Root)
 }
 

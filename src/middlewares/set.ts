@@ -1,5 +1,7 @@
-import express, { Express } from 'express'
-import helmet, { HelmetOptions } from 'helmet'
+import type { Express } from 'express'
+import express from 'express'
+import type { HelmetOptions } from 'helmet'
+import helmet from 'helmet'
 import session from 'express-session'
 
 function setMiddlewares(app: Express, sessionSecret: string) {

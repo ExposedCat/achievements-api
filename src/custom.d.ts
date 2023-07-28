@@ -1,12 +1,12 @@
-import { Database, JwtUserData } from './index.js'
+import type { Database, JwtUserData } from './index.js'
 
-interface Locals {
+interface Context {
 	database: Database
 }
 
 declare module 'express' {
 	export interface Response {
-		locals: Locals
+		ctx: Context
 	}
 	export interface Request {
 		authorization: JwtUserData

@@ -1,4 +1,4 @@
-import { UserValidationField } from '../types/index.js'
+import type { UserValidationField } from '../types/index.js'
 
 function isValidEmail(email: string) {
 	// Non-whitespace and non-sign character

@@ -1,16 +1,10 @@
-import {
-	BasicHandler,
-	HandlerData,
-	HandlerType,
-	ResponseName,
-	ResultType,
-	UserAuthData
-} from '../types/index.js'
+import type { BasicHandler, HandlerData, UserAuthData } from '../types/index.js'
+import { HandlerType, ResponseName, ResultType } from '../types/index.js'
 import { validateUserData } from '../middlewares/index.js'
 import { respond } from '../services/index.js'
 import { User } from '../models/index.js'
 
-const handler: BasicHandler = async (req, res, next) => {
+const handler: BasicHandler = async (req, res) => {
 	const { email, password } = req.body as UserAuthData
 	try {
 		const { isError, data } = await User.login(

@@ -1,4 +1,5 @@
-import { ResponseName, ServiceResponse, UserModel } from '../types/index.js'
+import type { ServiceResponse, UserModel } from '../types/index.js';
+import { ResponseName } from '../types/index.js'
 import { generateJwt } from '../helpers/index.js'
 
 async function loginUser(

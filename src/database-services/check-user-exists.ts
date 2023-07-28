@@ -1,7 +1,7 @@
-import { UserModel } from '../types/index.js'
+import type { UserModel } from '../types/index.js'
 
 async function userExists(this: UserModel, email: string, password?: string) {
-	let searchQuery: {
+	const searchQuery: {
 		email: string
 		password?: string
 	} = { email }

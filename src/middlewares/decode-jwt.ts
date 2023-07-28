@@ -1,5 +1,6 @@
-import { JwtUserData, ResponseName, ResultType } from '../types/index.js'
-import { Request, Response, NextFunction } from 'express'
+import type { JwtUserData } from '../types/index.js'
+import { ResponseName, ResultType } from '../types/index.js'
+import type { Request, Response, NextFunction } from 'express'
 import { verify } from 'async-jsonwebtoken'
 import { respond } from '../services/index.js'
 

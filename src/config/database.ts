@@ -1,4 +1,5 @@
-import mongoose, { ConnectOptions } from 'mongoose'
+import type { ConnectOptions } from 'mongoose'
+import mongoose from 'mongoose'
 
 async function connect(connectionString: string) {
 	const connectionOptions = {

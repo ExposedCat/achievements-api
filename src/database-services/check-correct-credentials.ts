@@ -1,4 +1,4 @@
-import { UserModel, CredentialsValidaton } from '../types/index.js'
+import type { UserModel, CredentialsValidaton } from '../types/index.js'
 import { compare } from '../helpers/index.js'
 
 async function correctCredentials(

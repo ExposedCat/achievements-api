@@ -1,4 +1,5 @@
-import { UserModel, ServiceResponse, ResponseName } from '../types/index.js'
+import type { UserModel, ServiceResponse } from '../types/index.js'
+import { ResponseName } from '../types/index.js'
 
 async function registerUser(
 	this: UserModel,

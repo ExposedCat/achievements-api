@@ -1,5 +1,8 @@
-import { User as UserModelObject, UserDefinition } from '../models/index.js'
-import { DocumentType } from '@typegoose/typegoose'
+import type {
+	User as UserModelObject,
+	UserDefinition
+} from '../models/index.js'
+import type { DocumentType } from '@typegoose/typegoose'
 
 type UserModel = typeof UserModelObject
 
