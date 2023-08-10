@@ -1,14 +1,19 @@
-import type { Database, JwtUserData } from './index.js'
+import 'express'
+import type { Database } from './config/database.js'
 
-interface Context {
-	database: Database
-}
-
-declare module 'express' {
-	export interface Response {
-		ctx: Context
+export declare global {
+	namespace NodeJS {
+		interface ProcessEnv {
+			PORT: number
+			DB_CONNECTION_STRING: string
+		}
 	}
-	export interface Request {
-		authorization: JwtUserData
+
+	namespace Express {
+		interface Response {
+			ctx: {
+				database: Database
+			}
+		}
 	}
 }

@@ -1,18 +1,19 @@
+import type { Request, Response, NextFunction } from 'express'
 import express from 'express'
+import type { Database } from './database.js'
 
-import { setMiddlewares } from '../middlewares/set.js'
-import { setHandlers } from '../controllers/set.js'
+export type Endpoint = (req: Request, res: Response, next: NextFunction) => void
 
-function initServer(sessionSecret: string) {
+export async function runServer(
+	port: number,
+	database: Database
+): Promise<void> {
 	const app = express()
 
-	setMiddlewares(app, sessionSecret)
-	setHandlers(app)
+	app.use((req, res, next) => {
+		res.ctx.database = database
+		return next()
+	})
 
-	return {
-		server: app,
-		runServer: (port: number) => app.listen(port)
-	}
+	return new Promise(resolve => app.listen(port, resolve))
 }
-
-export { initServer }

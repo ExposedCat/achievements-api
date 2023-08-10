@@ -1,3 +1,7 @@
 {
-  "recommendations": ["rvest.vs-code-prettier-eslint", "dbaeumer.vscode-eslint"]
+  "recommendations": [
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint",
+    "wayou.vscode-todo-highlight"
+  ]
 }

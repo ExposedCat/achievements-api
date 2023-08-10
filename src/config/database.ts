@@ -1,27 +1,31 @@
-import type { ConnectOptions } from 'mongoose'
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb'
+import type { ObjectId, Collection } from 'mongodb'
 
-async function connect(connectionString: string) {
-	const connectionOptions = {
-		useNewUrlParser: true,
-		useUnifiedTopology: true
-	}
-	try {
-		await mongoose.connect(
-			connectionString,
-			connectionOptions as ConnectOptions
-		)
-	} catch (error) {
-		console.error('[Database] Can not connect:')
-		console.trace(error)
-		process.exit(2)
-	}
+export type WithoutId<B> = Omit<B, '_id'>
+
+export type Achievement = {
+	_id: ObjectId
+	name: string
+	description: string
 }
 
-function initDatabase(connectionString: string) {
-	mongoose.Promise = global.Promise
-	const connector = connect.bind(null, connectionString)
-	return connector
+export type User = {
+	_id: ObjectId
+	userId: string
+	achievements: ObjectId[]
 }
 
-export { initDatabase }
+export type Database = {
+	achievements: Collection<Achievement>
+	users: Collection<User>
+}
+
+export async function connectToDb() {
+	const client = new MongoClient(process.env.DB_CONNECTION_STRING)
+	await client.connect()
+	const mongoDb = client.db()
+	const achievements = mongoDb.collection<Achievement>('achievements')
+	const users = mongoDb.collection<User>('users')
+	const database: Database = { achievements, users }
+	return database
+}
