@@ -1,8 +1,6 @@
 import { MongoClient } from 'mongodb'
 import type { ObjectId, Collection } from 'mongodb'
 
-export type WithoutId<B> = Omit<B, '_id'>
-
 export type Achievement = {
 	_id: ObjectId
 	name: string
